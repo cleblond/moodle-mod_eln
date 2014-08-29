@@ -1,0 +1,897 @@
+#page-mod-eln-edit .ouw_preview {
+    border:1px solid #ddd;
+    padding:10px;
+    margin:1em;
+}
+#page-mod-eln-view .ouw_recentchanges {
+    font-size:0.85em;
+    color:#636363;
+    margin-top:0.5em;
+}
+#page-mod-eln-view .ouw_recentchanges h2 {
+    margin:0 1em 0 0;
+    display:inline;
+    font-size:1.0em;
+    font-weight:normal;
+}
+#page-mod-eln-view .ouw_recentchanges ul,
+#page-mod-eln-view .ouw_recentchanges li {
+    display:inline;
+    margin:0;
+    padding:0;
+}
+#page-mod-eln-view .ouw_recentchanges li {
+    margin-right:0.5em;
+}
+
+#page-mod-eln-edit #ouw_countdown {
+    float:right;
+    margin-left:2em;
+    border:1px solid #ddd;
+    padding:4px;
+}
+.dir-rtl#mod-eln-edit #ouw_countdown {
+    float: left;
+}
+#page-mod-eln-edit form#ouw_edit {
+    margin-top:1em;
+}
+#page-mod-eln-edit #ouw_countdownurgent {
+    font-weight:bold;
+    color:red;
+}
+
+#page-mod-eln-history table,
+#page-mod-eln-wikihistory table,
+#page-mod-eln-contributions table {
+    width:100%;
+}
+
+#page-mod-eln-history .ouw_history th,
+#page-mod-eln-wikihistory th,
+#page-mod-eln-contributions th {
+    text-align:left;
+    padding: 5px 12px 5px 4px;
+    background: #a7d2ff;
+    border-left: 1px solid #a7d2ff;
+    border-right: 1px solid #a7d2ff;
+    border-top:1px solid #888;
+    border-bottom:1px dotted #888;
+}
+.dir-rtl#page-mod-eln-history .ouw_history th,
+.dir-rtl#page-mod-eln-wikihistory th,
+.dir-rtl#page-mod-eln-contributions th {
+    text-align: right;
+}
+
+#page-mod-eln-history .ouw_history td,
+#page-mod-eln-wikihistory td,
+#page-mod-eln-contributions td {
+    padding: 3px 12px 3px 4px;
+    border-bottom:1px dotted #888;
+}
+#page-mod-eln-wikihistory td.ouw_rightcol,
+#page-mod-eln-contributions td.ouw_rightcol,
+#page-mod-eln-history .ouw_history td.ouw_rightcol {
+    border-right:1px dotted #888;
+}
+#page-mod-eln-wikihistory td.ouw_leftcol,
+#page-mod-eln-contributions td.ouw_leftcol,
+#page-mod-eln-history .ouw_history td.ouw_leftcol {
+    border-left:1px dotted #888;
+}
+#page-mod-eln-history .ouw_history td.check,
+#page-mod-eln-history .ouw_history td.comparebutton {
+    padding-right:4px;
+}
+#page-mod-eln-history .ouw_history td.comparebutton {
+    padding-top:6px;
+    border-bottom:none;
+}
+#page-mod-eln-history .ouw_history tr.current,
+#page-mod-eln-wikihistory tr.current {
+    background:#dcedff;
+}
+#page-mod-eln-history .ouw_history td.comparebutton {
+    text-align:right;
+    padding-bottom:6px;
+}
+.dir-rtl#mod-eln-history .ouw_history td.comparebutton {
+    text-align:left;
+}
+#page-mod-eln-history .ouw_history table,
+#page-mod-eln-wikihistory table{
+    margin-top:1em;
+}
+#page-mod-eln-contributions .ouw_contributionsgroups {
+    background:#f0f0f0;
+    padding:8px;
+}
+
+
+#eln_belowtabs {
+    margin-left:auto;
+    margin-right:auto;
+}
+
+#eln_belowtabs_annotate {
+    display: none;
+}
+
+body.jsenabled #eln_belowtabs_annotate {
+    display: block;
+}
+
+#eln_belowtabs_annotate_nojs {
+    display: block;
+}
+
+body.jsenabled #eln_belowtabs_annotate_nojs {
+    display: none;
+}
+
+#page-mod-eln-viewold .ouw_versionbox,
+#page-mod-eln-diff .ouw_versionbox {
+    border-top:1px solid #888;
+    background:#dcedff;
+    padding:8px 8px 10px 8px;
+}
+#page-mod-eln-diff .ouw_versionbox .ouw_date {
+    font-weight:bold;
+}
+#page-mod-eln-viewold .ouw_oldversion h1 {
+    font-size:1em;
+    margin:0;
+}
+#page-mod-eln-viewold .ouw_oldversion .ouw_person {
+    font-weight:normal;
+}
+
+#page-mod-eln-viewold .ouw_prev {
+    float:left;
+}
+.dir-rtl#page-mod-eln-viewold .ouw_prev {
+    float: right;
+}
+#page-mod-eln-viewold .ouw_next {
+    float:right;
+}
+.dir-rtl#page-mod-eln-viewold .ouw_next {
+    float: left;
+}
+
+#eln_indexlinks {
+    margin:0 0 8px;
+    padding:0;
+    text-align:right;
+}
+.dir-rtl #eln_indexlinks {
+    text-align: left;
+}
+
+#eln_indexlinks ul {
+    margin:0;
+    padding:0;
+    display:inline;
+}
+#eln_indexlinks form,
+#eln_indexlinks form div {
+    display:inline;
+}
+#eln_indexlinks form input {
+    font-size:0.85em;
+}
+#eln_indexlinks #ouw_searchbox {
+    width:10em;
+}
+
+#eln_indexlinks li {
+    margin:0 0.5em 0 0;
+    padding:0;
+    list-style-type:none;
+    display:inline;
+}
+#eln_noindexlink {
+    height:1em;
+}
+#eln_indexlinks a {
+    border:1px solid #aaa;
+    padding:2px;
+    font-size:84%;
+}
+#eln_indexlinks span {
+    border:1px solid black;
+    padding:2px;
+    font-size:84%;
+}
+
+#page-mod-eln-wikiindex ul.ouw_index,
+#page-mod-eln-wikiindex ul.ouw_index li,
+#page-mod-eln-wikiindex ul.ouw_indextree,
+#page-mod-eln-wikiindex ul.ouw_indextree li,
+#page-mod-eln-import ul.ouw_indextree,
+#page-mod-eln-import ul.ouw_indextree li {
+    list-style-type:none;
+    margin:0;
+    padding:0;
+}
+#page-mod-eln-wikiindex ul.ouw_index,
+#page-mod-eln-wikiindex ul.ouw_indextree {
+    margin-bottom:2em;
+}
+#page-mod-eln-import .ouw_title,
+#page-mod-eln-wikiindex .ouw_title {
+    display:block;
+    font-weight:bold;
+    background:#dcedff;
+    padding:4px 8px 8px;
+    border-top:1px solid #888;
+    margin-top:-1px;
+    color: black;
+}
+#page-mod-eln-wikiindex a.ouw_title_link,
+#page-mod-eln-import a.ouw_title_link {
+    color:black;
+}
+#page-mod-eln-import .ouw_indexinfo,
+#page-mod-eln-wikiindex .ouw_indexinfo {
+    border:1px dotted #888;
+    border-top:none;
+    padding:4px 8px 6px;
+    font-size:0.8em;
+    color:#888;
+}
+#page-mod-eln-wikiindex .ouw_index .ouw_index_startpage .ouw_indexinfo {
+    border-bottom:1px dotted #888;
+}
+.ie#page-mod-eln-wikiindex .ouw_index_startpage .ouw_title {
+    border-top:2px solid #888;
+}
+
+
+
+#page-mod-eln-wikiindex .ouw_missingfrom {
+    font-size:0.85em;
+}
+#page-mod-eln-wikiindex #eln_belowtabs h2 {
+    font-size:1.0em;
+    margin-bottom:0.5em;
+    margin-top:2em;
+}
+#page-mod-eln-wikiindex h2.ouw_orphans {
+    margin-bottom:0.75em;
+}
+
+#page-mod-eln-import ul.ouw_indextree ul,
+#page-mod-eln-wikiindex ul.ouw_indextree ul {
+    margin-left:3em;
+    padding-left:0;
+    margin-top:0;
+    margin-bottom:0;
+}
+#page-mod-eln-wikiindex ul.ouw_indextree li ul {
+}
+#page-mod-eln-wikiindex ul.ouw_indextree ul ul {
+    margin-left:2.75em;
+}
+#page-mod-eln-wikiindex ul.ouw_indextree ul ul ul {
+    margin-left:2.5em;
+}
+#page-mod-eln-wikiindex ul.ouw_indextree ul ul ul ul {
+    margin-left:2.25em;
+}
+#page-mod-eln-wikiindex ul.ouw_indextree ul ul ul ul ul {
+    margin-left:2em;
+}
+#page-mod-eln-wikiindex ul.ouw_indextree ul ul ul ul ul ul {
+    margin-left:1.75em;
+}
+#page-mod-eln-wikiindex ul.ouw_indextree ul ul ul ul ul ul ul {
+    margin-left:1.5em;
+}
+#page-mod-eln-wikiindex ul.ouw_indextree ul ul ul ul ul ul ul ul {
+    margin-left:1.25em;
+}
+#page-mod-eln-wikiindex ul.ouw_indextree ul ul ul ul ul ul ul ul ul {
+    margin-left:1em;
+}
+
+#page-mod-eln-diff .ouw_left,
+#page-mod-eln-diff .ouw_right {
+    float:left;
+    width:50%;
+}
+.dir-rtl#page-mod-eln-diff .ouw_left,
+.dir-rtl#page-mod-eln-diff .ouw_right {
+    float:right;
+}
+#page-mod-eln-diff .ouw_diff {
+    background:#f0f0f0;
+    color:#636363;
+    border-left:1px dotted #888;
+    border-right:1px dotted #888;
+    border-bottom:1px dotted #888;
+    padding:8px;
+}
+#page-mod-eln-diff .ouw_left .ouw_diff,
+#page-mod-eln-diff .ouw_left .ouw_versionbox {
+    margin-right:1em;
+}
+#page-mod-eln-diff .ouw_right .ouw_diff,
+#page-mod-eln-diff .ouw_right .ouw_versionbox {
+    margin-left:1em;
+}
+#page-mod-eln-diff .ouw_deleted {
+    background:white;
+    color:red;
+    text-decoration:line-through;
+}
+#page-mod-eln-diff .ouw_added {
+    background:white;
+    color:green;
+}
+
+#page-mod-eln-diff .ouw_advice {
+    margin-bottom:1em;
+}
+
+.ouw_subwiki {
+    font-size:0.85em;
+}
+.ouw_subwiki form,
+.ouw_subwiki div {
+    display:inline;
+}
+#page-mod-eln-view .ouw_intro {
+    margin-top:1em;
+}
+
+#page-mod-eln-view .ouw_byheading {
+    display:inline;
+    font-weight:normal;
+    font-style:normal;
+    font-size:0.85em;
+    margin-left:1em;
+}
+
+#page-mod-eln-view .ouw_editsection,
+#page-mod-eln-view .ouw_annotate,
+#page-mod-eln-view .ouw_editpage,
+#page-mod-eln-view #expandcollapseannotations,
+#page-mod-eln-view #showhideannotationicons {
+    margin-right:1em;
+}
+
+/* Annotation icon show/hide link logic */
+#page-mod-eln-view .eln-hide-annotations #hideannotationicons {
+    display: none;
+}
+#page-mod-eln-view #showannotationicons {
+    display: none;
+}
+#page-mod-eln-view .eln-hide-annotations #showannotationicons {
+    display: inline;
+}
+#page-mod-eln-view .eln-hide-annotations .eln-annotation-tag {
+    display: none;
+}
+#page-mod-eln-view.jsenabled .eln-hide-annotations #expandcollapseannotations {
+    display: none;
+}
+
+.eln_content h1,
+.eln_content h2 {
+    font-size:1.5em;
+    display:inline;
+}
+.eln_content h3,
+.eln_content h4,
+.eln_content h5 {
+    font-size:1em;
+    display:inline;
+}
+.eln_content h6 {
+    font-size:0.85em;
+    display:inline;
+}
+
+.eln_content .ouw_heading1,
+.eln_content .ouw_heading2 {
+    margin:0.6667em 0 0.3333em 0;
+}
+.eln_content .ouw_heading3,
+.eln_content .ouw_heading4,
+.eln_content .ouw_heading5 {
+    margin:1em 0 0.5em 0;
+}
+.eln_content .ouw_heading6 {
+    margin:1.25em 0 0.625em 0;
+}
+
+.eln_content h1.ouw_fixedheading,
+.eln_content h2.ouw_fixedheading,
+.eln_content h3.ouw_fixedheading,
+.eln_content h4.ouw_fixedheading,
+.eln_content h5.ouw_fixedheading,
+.eln_content h6.ouw_fixedheading {
+    font-size:1em;
+    margin:1em 0 0.5em 0;
+}
+
+.eln_content h1.ouw_fixedheading .ouw_headingtext,
+.eln_content h2.ouw_fixedheading .ouw_headingtext {
+    font-size:1.5em;
+}
+.eln_content h1 {
+    padding-bottom:2px;
+    border-bottom:1px dotted #888;
+}
+.eln_content h6.ouw_fixedheading .ouw_headingtext {
+    font-size:0.85em;
+}
+.eln_content h3 {
+    border-bottom:1px dotted #888;
+    padding-bottom:2px;
+}
+.eln_content h5,
+.eln_content h6 {
+    font-weight:normal;
+    font-style:italic;
+}
+
+#ouw_ac_formcontainer {
+  margin-top:1.5em;
+  clear:right;
+}
+.dir-rtl#ouw_ac_formcontainer {
+    clear:left;
+}
+.ouw_deletedrow {
+    background-color:#cccccc;
+}
+.ouw_deleted {
+    color:#cc0000;
+}
+
+.ouw_recenter {
+    font-weight:bold;
+    color:black;
+}
+.ouw_recent {
+    color:black;
+}
+.ouw_recentnot {
+    color:#636363;
+}
+
+#page-mod-eln-wikiindex .ouw_wikirecentchanges ul,
+#page-mod-eln-wikiindex .ouw_wikirecentchanges li {
+    list-style-type:none;
+    margin:0;
+    padding:0;
+}
+
+
+#page-mod-eln-wikihistory .ouw_paging {
+    margin-top:1em;
+}
+#page-mod-eln-wikihistory .ouw_paging_prev {
+    float:left;
+    width:50%;
+    text-align:right;
+}
+.dir-rtl#mod-eln-wikihistory .ouw_paging_prev {
+    float: right;
+    text-align: left;
+}
+#page-mod-eln-wikihistory .ouw_paging_prev a {
+    margin-right:2em;
+}
+#page-mod-eln-wikihistory .ouw_paging_next {
+    float:left;
+    width:50%;
+}
+.dir-rtl#page-mod-eln-wikihistory .ouw_paging_next {
+    float:right;
+}
+#page-mod-eln-wikihistory .ouw_paging_next a {
+    margin-left:2em;
+}
+
+/* Hack because font-family:inherit doesn't work in IE */
+#page-mod-eln-view.ie textarea {
+    font-family: Verdana,sans-serif;
+}
+
+#page-mod-eln-view .ouw_linkedfrom {
+    margin-top:1.5em;
+    font-size:0.85em;
+}
+#page-mod-eln-view .ouw_linkedfrom h3 {
+    margin:0;
+    font-size:1em;
+    font-weight:normal;
+}
+#page-mod-eln-view .ouw_linkedfrom ul,
+#page-mod-eln-view .ouw_linkedfrom li {
+    margin:0;
+    padding:0;
+    list-style-type:none;
+    display:inline;
+}
+
+#page-mod-eln-wikiindex .ouw_missingpages ul,
+#page-mod-eln-wikiindex .ouw_missingpages li {
+    margin:0;
+    padding:0;
+    list-style-type:none;
+    display:inline;
+}
+
+
+.ouw_subwiki {
+    float:left;
+}
+.dir-rtl .ouw_subwiki {
+    float: right;
+}
+.eln_notabs.eln_gotselector {
+    margin-top:1em;
+}
+
+.eln_lockinfobuttons form {
+    display:inline;
+}
+
+a.eln_noshow:link,a.eln_noshow:visited {
+    color:inherit;
+}
+
+.ouw_index .ouw_index_startpage {
+   margin-bottom:1em;
+}
+
+.ouw_timelocked {
+    margin-top:3em;
+    font-style:italic;
+}
+
+#page-mod-eln-wikiindex .ouw_savetemplate,
+#page-mod-eln-wikihistory .ouw_contributionslink {
+    margin-top:2em;
+}
+
+#page-mod-eln-contributions h2, #mod-eln-contributions h3 {
+    font-size:1em;
+    margin:1em 0 0.5em;
+}
+#page-mod-eln-contributions small {
+    font-size:1em;
+    font-weight:normal;
+}
+#page-mod-eln-contributions table {
+    margin-bottom:2em;
+}
+
+#page-mod-eln-entirewiki h1 a {
+    color:black;
+}
+#page-mod-eln-entirewiki .ouw_entry {
+    margin-bottom:2em;
+}
+
+.ouw_subscribe {
+    margin-top:2em;
+    font-size:0.85em;
+}
+.ouw_subscribe img {
+    vertical-align:bottom;
+}
+.ouw_subscribe span {
+    position:relative;
+    top:-1px;
+}
+
+.ouw_belowmainhead {
+    border:1px dotted #888;
+    border-top:none;
+    padding:0px 8px 4px;
+}
+.ouw_topspacer {
+     padding-top:4px;
+}
+.ouw_topheading {
+    background:#dcedff;
+    padding:4px 8px 8px;
+    border-top:1px solid #888;
+  /*  margin-top:1.5em; */
+}
+
+.ouw_topheading h2 {
+    border:none;
+}
+
+
+.ouw_indextree,
+.ouw_indextree li {
+    list-style-type:none;
+}
+
+#page-mod-eln-entirewiki .ouw_entry h1.ouw_entry_heading {
+    background:#dcedff;
+    padding:4px 8px 8px;
+    border-top:1px solid #888;
+    border-bottom:none;
+    display:block;
+    margin:0.5em 0 0;
+}
+#page-mod-eln-entirewiki .ouw_entry .eln_content {
+    border:1px dotted #888;
+    border-top:none;
+    padding:4px 8px;
+    margin-top:0;
+}
+
+#page-mod-eln_addnew {
+    display:inline;
+}
+
+
+#page-mod-eln_addnew ul,
+#page-mod-eln_addnew li {
+    margin:0;
+    padding:0;
+    display:inline;
+    list-style-type:none;
+}
+
+
+.eln_addnew_class {
+    display:inline;
+}
+
+.eln-annotation,
+.eln-orphaned-annotation {
+    display:block;
+    width:50%;
+    min-height:42px;
+    margin:0.3em;
+    padding:0.3em;
+    background-color:#F7F0D9;
+}
+
+.eln-annotation h3,
+.eln-orphaned-annotation h3 {
+    display:block;
+    font-weight:bold;
+    border:0;
+    margin:0 0 0.2em;
+}
+
+.eln-annotation .userpicture,
+.eln-orphaned-annotation .userpicture {
+    float:left;
+    margin: 0.2em 0.1em;
+}
+.dir-rtl .eln-annotation .userpicture,
+.dir-rtl .eln-orphaned-annotation .userpicture {
+    float: right;
+}
+
+.eln-annotation .eln-annotation-content,
+.eln-orphaned-annotation .eln-annotation-content {
+    display:block;
+    margin-left:40px;
+    padding-left:0.3em;
+    font-weight:normal;
+}
+
+.eln-annotation .eln-annotation-content .eln-annotation-content-title,
+.eln-orphaned-annotation .eln-annotation-content .eln-annotation-content-title {
+    display:block;
+    padding-bottom:0.3em;
+    font-weight:bold;
+}
+
+.eln-annotation-tag {
+    padding:1px 1px 0 1px;
+    margin:0;
+    cursor:default;
+}
+
+.eln-annotation-marker {
+    padding:0;
+    margin:0;
+    cursor:default;
+}
+
+.eln-annotation-marker img {padding:1px;}
+
+.eln-annotation-tag img {padding:0;}
+
+.eln-annotation-marker:hover{background-color:#99ccff;}
+
+#page-mod-eln-view #expandcollapseannotations {display:none;}
+#page-mod-eln-view.jsenabled #expandcollapseannotations {display:inline;}
+#page-mod-eln-view #expandallannotations {display:inline;}
+#page-mod-eln-view #collapseallannotations {display:none;}
+
+
+#eln_addannotation label {
+    display:block;
+}
+
+#eln_addannotation_buttons {
+}
+/** Override styles for annotation.php **/
+#page-mod-eln-annotate #mform1 {
+    margin-top:2em;
+}
+
+#page-mod-eln-annotate #mform1 .fitem .fitemtitle {
+    margin-left: -30px;
+    width: 160px;
+}
+
+#page-mod-eln-annotate #mform1 .fitem .ftextarea {
+    margin-left: 140px;
+    width: 400px;
+}
+
+#page-mod-eln-annotate #mform1 .fitem .fcheckbox {
+    margin-left: 140px;
+}
+
+#page-mod-eln-annotate #mform1 .fitem .fgroup {
+    margin-left: 140px;
+}
+
+.eln_lock_div {margin-top:2em;}
+
+/* Ugh, problems when resized, I can't get it to work */
+.ie7 #wikiselect {
+    font-size:11px;
+}
+
+#annotationdialog label {
+    display:block;
+    float:left;
+    width:30%;
+    clear:left;
+}
+.dir-rtl#annotationdialog label {
+    float: right;
+    clear: right;
+}
+
+#page-mod-eln-edit #annotationdialog {display: none;}
+#page-mod-eln-edit div#annotationdialog_c{width:90%;}
+#page-mod-eln-edit div#annotationdialog_c .mform,
+#annotationdialog_c select{width:100%;}
+
+.clear {
+    clear:both;
+}
+
+.yui-pe .yui-pe-content {
+    display:none;
+}
+
+#yui-gen0-button {color:#000000;}
+
+.eln-notifyproblem {
+    color: #ffffff;
+    background-color: #ff0000;
+    padding: 0 2em;
+}
+
+.eln-sizewarning img {
+    margin-right: 4px;
+    position:relative;
+    top: 3px;
+}
+
+.eln-sizewarning {
+    margin-top: 10px;
+    margin-left: 20px;
+    text-indent: -20px;
+}
+
+.ouw_wordcount span {
+    margin-top: 0.5em;
+    font-size: 0.8em;
+    font-weight: normal;
+    color: #555;
+}
+
+#ouw_newsectionname,
+#ouw_newpagename {
+    margin-right:5px;
+}
+
+#page-mod-eln-edit .fp-pathbar {
+    display: none;
+}
+
+/** Styles for participation.php **/
+#page-mod-eln-participation fieldset.felement {margin-left: 16%;}
+#page-mod-eln-participation form#options div {text-align:right;margin-left:auto;margin-right:20px;}
+#page-mod-eln-participation .header .commands {display: inline;}
+#page-mod-eln-participation .picture {width: 35px;}
+#page-mod-eln-participation .fullname,
+#page-mod-eln-participation .pagescreated,
+#page-mod-eln-participation .pagesedited,
+#page-mod-eln-participation .wordsadded,
+#page-mod-eln-participation .wordsdeleted {text-align: left;}
+#page-mod-eln-participation .participation .grade,
+#page-mod-eln-participation .qgprefs #optiontable {text-align:right;margin-left:auto;}
+
+/** Styles for userparticipation.php **/
+#page-mod-eln-user-participation fieldset.felement {margin-left: 16%;}
+#page-mod-eln-user-participation form#options div {text-align:right;margin-left:auto;margin-right:20px;}
+#page-mod-eln-user-participation .header .commands {display: inline;}
+#page-mod-eln-user-participation .date,
+#page-mod-eln-user-participation .time,
+#page-mod-eln-user-participation .page,
+#page-mod-eln-user-participation .words,
+#page-mod-eln-user-participation .view {text-align: left;}
+#page-mod-eln-user-participation .qgprefs #optiontable {text-align:right;margin-left:auto;}
+
+#page-mod-eln-user-participation .savegradesbutton {text-align: center;}
+
+/** Style for missing template images message **/
+.imgremoved {
+    font-weight:bold;
+}
+
+/* Import process */
+#page-mod-eln-import .eln_import h3 {
+    font-weight: bold;
+}
+.eln_import.eln_import_step2 form {
+    background: 0;
+    padding: 0;
+}
+.eln_import .eln_import_act {
+    margin-bottom: .5em;
+}
+.eln_import .eln_import_act .eln_import_link a {
+    margin-left: 50px;
+    text-decoration: none;
+}
+.eln_import .eln_import_act .fitem {
+    margin-left: 40px;
+}
+.eln_import .eln_import_act .eln_import_link img {
+    margin-right: 5px;
+}
+.eln_import .eln_import_act .eln_import_nocontent {
+    margin-left: 100px;
+    font-style: italic;
+}
+.ouw_indextree input.eln_page_checkbox {
+    float: left;
+    margin-top: 8px;
+    margin-left: 3px;
+    margin-right: 5px;
+    position: relative;
+    display: inline;
+}
+.ie7 .ouw_indextree input.eln_page_checkbox {
+    margin-top:25px;
+}
+.eln_import.eln_import_step3 div.fstatic ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.eln_import_warn {
+    padding: 1em;
+    color: red;
+}
+.eln_import_info {
+    padding: 1em;
+}
+.eln_import.eln_import_step4 ul {
+    list-style: none;
+}

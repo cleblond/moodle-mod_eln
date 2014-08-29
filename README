@@ -1,0 +1,16 @@
+This is a modified OuWiki that functions as an electronic laboratory notebook.
+
+Installation.
+Install like any other activity module by copying the folder to your moodle mod folder.
+
+Optionally
+Install two Atto plugins (moodle-atto_structure and moodle-atto_timestamp) and filter (moodle-chemdoodle_filter) which are useful
+for allowing users to add chemical structures, timestamps and interactive spectrum.  See http://www.github/cleblond for more info on these plugins. 
+
+
+Modifications.
+
+* extensive language file string changes
+* Add "New Experiment" tab to navigation tabs for easily creating new experiment pages.
+* Changed start page to My ELN Index.
+
