@@ -252,7 +252,7 @@ $string['format_rtf']='Download in word processor format';
 $string['format_template']='Download as ELN template file';
 $string['savedat']='Saved at {$a}';
 
-$string['feedtitle']='{$a->course} wiki: {$a->name} - {$a->subtitle}';
+$string['feedtitle']='{$a->course} ELN: {$a->name} - {$a->subtitle}';
 $string['feeddescriptionchanges']='Lists all changes made to the ELN. Subscribe to this feed if you want to be updated whenever the ELN changes.';
 $string['feeddescriptionpages']='Lists all new pages on the ELN. Subscribe to this feed if you want to be updated whenever someone creates a new page.';
 $string['feeddescriptionhistory']='Lists all changes to this individual ELN page. Subscribe to this feed if you want to be updated whenever someone edits this page.';
@@ -366,7 +366,7 @@ $string['sizewarning'] = 'This ELN page is very large and may operate slowly.
 If possible, please split the content into logical chunks and
 place it on separate linked pages.';
 
-$string['displayversion'] = 'OU wiki version: <strong>{$a}</strong>';
+$string['displayversion'] = 'ELN version: <strong>{$a}</strong>';
 
 // OU only
 $string['externaldashboardadd'] = 'Add ELN to dashboard';

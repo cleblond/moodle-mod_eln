@@ -83,7 +83,7 @@ function eln_dberror($error, $source = null) {
         $source = preg_replace('@^.*/(.*)(\.php)?$@', '\1',
                 $backtrace[0]['file']).'/'.$backtrace[0]['line'];
     }
-    print_error('Database problem: '.$error.' (code OUWIKI-'.$source.')');
+    print_error('Database problem: '.$error.' (code ELN-'.$source.')');
 }
 
 function eln_error($text, $source = null) {
@@ -92,7 +92,7 @@ function eln_error($text, $source = null) {
         $source = preg_replace('^.*/(.*)(\.php)?$^', '$1',
                 $backtrace[0]['file']).'/'.$backtrace[0]['line'];
     }
-    print_error("Wiki error: $text (code OUWIKI-$source)");
+    print_error("ELN error: $text (code ELN-$source)");
 }
 
 /**
@@ -113,7 +113,7 @@ function eln_get_wikiinfo(&$selectedact, &$selectedsubwiki, &$selectedeln, $cour
     // Basic checks that it is OK to continue using activity.
     if (!$ignorechecks && (!$selectedact->uservisible ||
             !has_capability('mod/eln:view', $selectedcontext))) {
-        eln_error('You are not able to access the selected wiki.');
+        eln_error('You are not able to access the selected ELN.');
     }
     // Get sub wiki selected - joining to wiki activity and cm to verify all correct.
     $sql = 'SELECT eln.*, sw.userid, sw.groupid FROM {eln_subwikis} sw
@@ -163,7 +163,7 @@ function eln_get_subwiki($course, $eln, $cm, $context, $groupid, $userid, $creat
                 eln_init_pages($course, $cm, $eln, $subwiki, $eln);
                 return $subwiki;
             }
-            eln_error('Wiki does not exist. View wikis before attempting other actions.');
+            eln_error('ELN does not exist. View ELNs before attempting other actions.');
             break;
 
         case OUWIKI_SUBWIKIS_GROUPS:
@@ -175,10 +175,10 @@ function eln_get_subwiki($course, $eln, $cm, $context, $groupid, $userid, $creat
                 $groups = groups_get_activity_allowed_groups($cm);
                 if (!$groups) {
                     if (!groups_get_all_groups($cm->course, 0, $cm->groupingid)) {
-                        eln_error('This wiki cannot be displayed because it is a group wiki,
+                        eln_error('This ELN cannot be displayed because it is a group ELN,
                                 but no groups have been set up for the course (or grouping, if selected).');
                     } else {
-                        eln_error('You do not have access to any of the groups in this wiki.');
+                        eln_error('You do not have access to any of the groups in this ELN.');
                     }
                 }
                 $groupid = reset($groups)->id;
@@ -196,7 +196,7 @@ function eln_get_subwiki($course, $eln, $cm, $context, $groupid, $userid, $creat
                 eln_init_pages($course, $cm, $eln, $subwiki, $eln);
                 return $subwiki;
             }
-            eln_error('Wiki does not exist. View wikis before attempting other actions.');
+            eln_error('ELN does not exist. View ELNs before attempting other actions.');
             break;
 
         case OUWIKI_SUBWIKIS_INDIVIDUAL:
@@ -210,7 +210,7 @@ function eln_get_subwiki($course, $eln, $cm, $context, $groupid, $userid, $creat
                 if (!has_capability('mod/eln:viewallindividuals', $context)) {
                     // Nope. Are they allowed to view people in same group?
                     if (!has_capability('mod/eln:viewgroupindividuals', $context)) {
-                        eln_error('You do not have access to view somebody else\'s wiki.');
+                        eln_error('You do not have access to view somebody else\'s ELN.');
                     }
                     // Check user is in same group. Note this isn't now restricted to the
                     // module grouping
@@ -229,7 +229,7 @@ function eln_get_subwiki($course, $eln, $cm, $context, $groupid, $userid, $creat
                         }
                     }
                     if (!$found) {
-                        eln_error('You do not have access to view this user\'s wiki.');
+                        eln_error('You do not have access to view this user\'s ELN.');
                     }
                 }
             }
@@ -247,11 +247,11 @@ function eln_get_subwiki($course, $eln, $cm, $context, $groupid, $userid, $creat
                 eln_init_pages($course, $cm, $eln, $subwiki, $eln);
                 return $subwiki;
             }
-            eln_error('Wiki does not exist. View wikis before attempting other actions.');
+            eln_error('ELN does not exist. View ELNs before attempting other actions.');
             break;
 
         default:
-            eln_error("Unexpected subwikis value: {$eln->subwikis}");
+            eln_error("Unexpected ELN value: {$eln->subwikis}");
     }
 }
 
@@ -311,18 +311,18 @@ function eln_init_pages($course, $cm, $eln, $subwiki, $eln) {
         $xml =  new DOMDocument();
         $xml->loadXML($content);
         if (!$xml) {
-            eln_error('Failed to load wiki template - not valid XML.
+            eln_error('Failed to load ELN template - not valid XML.
                     Check file in XML viewer and correct.');
         }
         if ($xml->documentElement->tagName != 'wiki') {
-            eln_error('Failed to load wiki template - must begin with &lt;wiki> tag.');
+            eln_error('Failed to load ELN template - must begin with &lt;wiki> tag.');
         }
         for ($page = $xml->documentElement->firstChild; $page; $page = $page->nextSibling) {
             if ($page->nodeType != XML_ELEMENT_NODE) {
                 continue;
             }
             if ($page->tagName != 'page') {
-                eln_error('Failed to load wiki template - expected &lt;page>.');
+                eln_error('Failed to load ELN template - expected &lt;page>.');
             }
             $title = null;
             $xhtml = null;
@@ -339,10 +339,10 @@ function eln_init_pages($course, $cm, $eln, $subwiki, $eln) {
                 } else {
                     if ($child->firstChild->nodeType != XML_TEXT_NODE &&
                        $child->firstChild->nodeType != XML_CDATA_SECTION_NODE) {
-                        eln_error('Failed to load wiki template - expected text node.');
+                        eln_error('Failed to load ELN template - expected text node.');
                     }
                     if ($child->firstChild->nextSibling) {
-                        eln_error('Failed to load wiki template - expected single text node.');
+                        eln_error('Failed to load ELN template - expected single text node.');
                     }
                     $text = $child->firstChild->nodeValue;
                 }
@@ -361,12 +361,12 @@ function eln_init_pages($course, $cm, $eln, $subwiki, $eln) {
                         $attachments = explode('|', $text);
                         break;
                     default:
-                        eln_error('Failed to load wiki template - unexpected element &lt;'.
+                        eln_error('Failed to load ELN template - unexpected element &lt;'.
                                 $child->tagName.'>.');
                 }
             }
             if ($xhtml === null) {
-                eln_error('Failed to load wiki template - required &lt;xhtml>.');
+                eln_error('Failed to load ELN template - required &lt;xhtml>.');
             }
 
             $newverid = eln_save_new_version($course, $cm, $eln, $subwiki, $title, $xhtml,
@@ -396,7 +396,7 @@ function eln_init_pages($course, $cm, $eln, $subwiki, $eln) {
             }
         }
     } else {
-        eln_error('Failed to load wiki template - file missing.');
+        eln_error('Failed to load ELN template - file missing.');
     }
 }
 
