@@ -377,10 +377,11 @@ function eln_init_pages($course, $cm, $eln, $subwiki, $eln) {
             $newverid = eln_save_new_version($course, $cm, $eln, $subwiki, $title, $xhtml,
                      -1, -1, -1, true);
 
-            // Copy any images or attachments associated with old version id.
+            // Copy any images , spectra or attachments associated with old version id.
             if ($oldfiles = $fs->get_directory_files($context->id, 'mod_eln', 'template',
                     $eln->id, "/$oldversionid/")) {
                 foreach ($oldfiles as $oldfile) {
+                    
                     if (in_array($oldfile->get_filename(), $attachments)) {
                         // Copy this file to the version attachment record.
                         $fs->create_file_from_storedfile(array(
@@ -397,7 +398,18 @@ function eln_init_pages($course, $cm, $eln, $subwiki, $eln) {
                                 'itemid' => $newverid,
                                 'filepath' => '/'), $oldfile);
                     }
+                    ///crl add support for jdx files
+                    $ext = pathinfo($oldfile->get_filename(), PATHINFO_EXTENSION);
+                    if ($ext == 'jdx') {
+                        // Copy this spectrum file to the version record.
+                        $fs->create_file_from_storedfile(array(
+                                'contextid' => $context->id,
+                                'filearea' => 'content',
+                                'itemid' => $newverid,
+                                'filepath' => '/'), $oldfile);
+                    }
                 }
+                //break;   //crl
             }
         }
     } else {

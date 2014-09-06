@@ -213,9 +213,11 @@ function get_online_display_content($format, $pageversion, $context, $subwiki, $
                 $markup .= '<title>' . htmlspecialchars($pageversion->title) . '</title>';
             }
             $markup .= '<versionid>' . $pageversion->versionid . '</versionid>';
+
             // Copy images found in content.
-            //print_r($pageversion->xhtml);
             //CRL changed from original ouwiki
+            //print_r($pageversion->xhtml);
+
             preg_match_all('#<img.*?src="@@PLUGINFILE@@/(.*?)".*?>#', $pageversion->xhtml, $matches);
             //echo "here";
             //print_r($matches);
@@ -237,6 +239,39 @@ function get_online_display_content($format, $pageversion, $context, $subwiki, $
                     }
                 }
             }
+
+
+
+           // Copy files that are linked to on this moodle found in content.
+            //CRL changed from original ouwiki
+            preg_match_all('#<a.*?href="@@PLUGINFILE@@/(.*?)"(.*?)>.*?</a>#', $pageversion->xhtml, $matches);
+            //echo "here";
+            //print_r($matches);
+            if (! empty($matches)) {
+                // Extract the file names from the matches.
+                foreach ($matches[1] as $key => $match) {
+                    //echo $match;
+                    // Get file name and copy to zip.
+                    $match = urldecode($match);
+                    // Copy image - on fail swap tag with string.
+                    if ($file = $fs->get_file($context->id, 'mod_eln', 'content',
+                            $pageversion->versionid, '/', $match)) {
+                        $files["/$pageversion->versionid/$match/"] = $file;
+                        //print_r($files);
+                    } else {
+                        
+                        $pageversion->xhtml = str_replace($matches[0][$key], $brokenimagestr,
+                                $pageversion->xhtml);
+                    }
+                }
+            }
+
+
+
+
+
+
+
             $markup .= '<xhtml>' . htmlspecialchars($pageversion->xhtml) . '</xhtml>';
             // Add attachments.
             if ($attachments = $fs->get_area_files($context->id, 'mod_eln', 'attachment',
