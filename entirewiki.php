@@ -222,14 +222,14 @@ function get_online_display_content($format, $pageversion, $context, $subwiki, $
             if (! empty($matches)) {
                 // Extract the file names from the matches.
                 foreach ($matches[1] as $key => $match) {
-                    echo $match;
+                    //echo $match;
                     // Get file name and copy to zip.
                     $match = urldecode($match);
                     // Copy image - on fail swap tag with string.
                     if ($file = $fs->get_file($context->id, 'mod_eln', 'content',
                             $pageversion->versionid, '/', $match)) {
                         $files["/$pageversion->versionid/$match/"] = $file;
-                        print_r($files);
+                        //print_r($files);
                     } else {
                         
                         $pageversion->xhtml = str_replace($matches[0][$key], $brokenimagestr,

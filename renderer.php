@@ -376,7 +376,7 @@ class mod_eln_renderer extends plugin_renderer_base {
         $content = eln_convert_content($content, $subwiki, $cm, null, $contentformat);
         // Need to replace brokenfile.php with draftfile.php since switching off filters
         // will switch off all filter.
-        echo "HHEERERRERERERRERERRE";
+        //echo "HHEERERRERERERRERERRE";
         $content = str_replace("\"$CFG->httpswwwroot/brokenfile.php#",
                 "\"$CFG->httpswwwroot/draftfile.php", $content);
         // Create output to be returned for printing.

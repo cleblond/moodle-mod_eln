@@ -286,7 +286,7 @@ function eln_init_pages($course, $cm, $eln, $subwiki, $eln) {
     if (is_null($eln->template)) {
         return;
     }
-    
+
     $fs = get_file_storage();
     $zip = get_file_packer();
     $context = context_module::instance($cm->id);
@@ -306,13 +306,8 @@ function eln_init_pages($course, $cm, $eln, $subwiki, $eln) {
                     $xmlfilename);
             }
         }
-       
 
         $content = $xmlfile->get_content();
-        ///added by crl to fix image import
-        //$content = file_rewrite_pluginfile_urls($content, 'pluginfile.php',
-        //        $context->id, 'mod_eln', 'content', $eln->id);
-
         $xml =  new DOMDocument();
         $xml->loadXML($content);
         if (!$xml) {
