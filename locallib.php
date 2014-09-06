@@ -308,6 +308,10 @@ function eln_init_pages($course, $cm, $eln, $subwiki, $eln) {
         }
 
         $content = $xmlfile->get_content();
+        ///added by crl to fix image import
+        //$content = file_rewrite_pluginfile_urls($content, 'pluginfile.php',
+        //        $context->id, 'mod_eln', 'content', $eln->id);
+
         $xml =  new DOMDocument();
         $xml->loadXML($content);
         if (!$xml) {

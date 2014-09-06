@@ -147,7 +147,7 @@ $string['savedby']='saved by {$a}';
 $string['system']='the system';
 $string['advice_viewold']='You are viewing an old version of this page.';
 
-$string['index']='ELN Details';
+$string['index']='Details';
 $string['myindex']='My index';
 
 
@@ -197,7 +197,7 @@ $string['eln:grade'] = 'Grade users who have have access to wiki';
 $string['eln:editothers'] = 'Edit the content of any sub-wiki that can be viewed';
 $string['eln:annotateothers'] = 'Annotate any sub-wiki that can be viewed';
 
-$string['wikirecentchanges']='ELN changes';
+$string['wikirecentchanges']='History';
 $string['wikirecentchanges_from']='ELN changes (page {$a})';
 $string['advice_wikirecentchanges_changes']='<p>The table below lists all changes to any page in this ELN, beginning with the latest changes. The most recent version of each page is highlighted.</p>
 <p>Using the links you can view a page as it looked after a particular change, or see what changed at that moment.</p>';

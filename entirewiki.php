@@ -178,6 +178,7 @@ switch ($format) {
         $files[$filerec->filename] = $fs->create_file_from_string($filerec, $markup);
         $zip = get_file_packer();
         $file = $zip->archive_to_storage($files, $context->id, 'mod_eln', 'temp', $id, '/', $filename . '.zip');
+        ///CRL Disable next line to stop template export!
         send_stored_file($file, 0, 0, true, array('dontdie' => true));
         // Delete all our temp files used in this process.
         $fs->delete_area_files($context->id, 'mod_eln', 'temp', $id);
@@ -203,6 +204,7 @@ function get_online_display_content($format, $pageversion, $context, $subwiki, $
                 $context->id, 'mod_eln', 'content', $pageversion->versionid);
     }
 
+
     switch ($format) {
         case OUWIKI_FORMAT_TEMPLATE:
             // Print template wiki page.
@@ -212,17 +214,24 @@ function get_online_display_content($format, $pageversion, $context, $subwiki, $
             }
             $markup .= '<versionid>' . $pageversion->versionid . '</versionid>';
             // Copy images found in content.
-            preg_match_all('#<img.*?src="@@PLUGINFILE@@/(.*?)".*?/>#', $pageversion->xhtml, $matches);
+            //print_r($pageversion->xhtml);
+            //CRL changed from original ouwiki
+            preg_match_all('#<img.*?src="@@PLUGINFILE@@/(.*?)".*?>#', $pageversion->xhtml, $matches);
+            //echo "here";
+            //print_r($matches);
             if (! empty($matches)) {
                 // Extract the file names from the matches.
                 foreach ($matches[1] as $key => $match) {
+                    echo $match;
                     // Get file name and copy to zip.
                     $match = urldecode($match);
                     // Copy image - on fail swap tag with string.
                     if ($file = $fs->get_file($context->id, 'mod_eln', 'content',
                             $pageversion->versionid, '/', $match)) {
                         $files["/$pageversion->versionid/$match/"] = $file;
+                        print_r($files);
                     } else {
+                        
                         $pageversion->xhtml = str_replace($matches[0][$key], $brokenimagestr,
                                 $pageversion->xhtml);
                     }
