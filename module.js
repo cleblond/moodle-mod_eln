@@ -67,6 +67,11 @@ M.mod_eln_view = {
         if(document.getElementById('ouw_create') != null) {
             this.elnSetFields();
         }
+
+        if(document.getElementById('ouw_clone') != null) {
+            this.elnSetCloneFields();
+        }
+
     },
 
     /**
@@ -168,6 +173,35 @@ M.mod_eln_view = {
         sectionname.onkeyup = function() { _this.elnClearDisabled(addbutton, sectionname); };
         sectionname.value = M.str.eln.typeinsectionname;
     },
+
+//add by CRL
+    elnSetCloneFields : function() {
+        var _this = this;
+        var createbutton = document.getElementById('ouw_clone');
+        createbutton.disabled = true;
+
+        var pagename = document.getElementById('ouw_clonepagename');
+        pagename.style.color = "gray";
+        pagename.notusedyet = true;
+        pagename.onfocus = function() { _this.elnResetThisField(pagename); };
+        pagename.onkeyup = function() { _this.elnClearDisabled(createbutton, pagename); };
+        pagename.value = M.str.eln.typeinclonepagename;
+
+        var addbutton = document.getElementById('ouw_add');
+        addbutton.disabled = true;
+
+        var sectionname = document.getElementById('ouw_newsectionname');
+        sectionname.style.color = "gray";
+        sectionname.notusedyet = true;
+        sectionname.onfocus = function() { _this.elnResetThisField(sectionname); };
+        sectionname.onkeyup = function() { _this.elnClearDisabled(addbutton, sectionname); };
+        sectionname.value = M.str.eln.typeinsectionname;
+    },
+
+
+
+
+
 
     elnClearDisabled : function(element, field) {
         if (field.value.length == 0) {

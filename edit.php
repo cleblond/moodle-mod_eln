@@ -33,9 +33,16 @@ if (file_exists($CFG->dirroot.'/local/mobile/ou_lib.php')) {
 
 $action = optional_param('editoption', '', PARAM_TEXT);
 
+//echo "Action=".$action;
+
 // for creating pages and sections
 $frompage = optional_param('frompage', null, PARAM_TEXT);
 $newsection = optional_param('newsection', null, PARAM_TEXT);
+$clonefrompage = optional_param('clonefrompage', null, PARAM_TEXT);
+
+
+//echo "<br>frompage=".$frompage;
+//echo "<br>pagename=".$pagename;
 
 // for creating/editing sections
 $section = optional_param('section', null, PARAM_RAW);
@@ -63,9 +70,30 @@ if (!$eln = $DB->get_record('eln', array('id' => $cm->instance))) {
 
 $PAGE->set_cm($cm);
 
+
+
+// CRL When cloning a new page, do some checks
+$clonepage = false;
+if (!is_null($clonefrompage)) {
+
+    $urlparams['clonefrompage'] = $clonefrompage;
+    $returnurl = new moodle_url('/mod/eln/view.php',
+            eln_display_wiki_parameters($clonefrompage, $subwiki, $cm, OUWIKI_PARAMS_ARRAY));
+    if (trim($pagename) === '') {
+        print_error('emptypagetitle', 'eln', $returnurl);
+    }
+    // Strip whitespace from new page name from form (editor does this for other links).
+    $pagename = preg_replace('/\s+/', ' ', $pagename);
+
+    $clonepage = true;
+    //echo "clonepage=true<br>";
+}
+
+
 // When creating a new page, do some checks
 $addpage = false;
 if (!is_null($frompage)) {
+    //echo "addpage=true<br>";
     $urlparams['frompage'] = $frompage;
     $returnurl = new moodle_url('/mod/eln/view.php',
             eln_display_wiki_parameters($frompage, $subwiki, $cm, OUWIKI_PARAMS_ARRAY));
@@ -110,9 +138,14 @@ $useattachments = !$addsection && !$section;
 
 // create the new mform
 // customdata indicates whether attachments are used (no for sections)
+
+
 $mform = new mod_eln_edit_page_form('edit.php', (object)array(
         'attachments' => $useattachments, 'startpage' => $pagename === '',
-        'addpage' => $addpage, 'addsection' => $addsection));
+        'addpage' => $addpage, 'clonepage' => $clonepage, 'addsection' => $addsection));
+
+
+
 
 // get form content if save/preview
 $content = null;
@@ -148,10 +181,25 @@ if ($cancel) {
 }
 
 // Get the current page version, creating page if needed
+
 $pageversion = eln_get_current_page($subwiki, $pagename, OUWIKI_GETPAGE_CREATE);
+/*
+echo print_object($subwiki);
+echo "<br>";
+echo print_object($pagename);
+echo "<br>";
+echo print_object($pageversion);
+echo "<br>";
+*/
 if ($addpage && !is_null($pageversion->xhtml)) {
     print_error('duplicatepagetitle', 'eln', $returnurl);
 }
+
+///add by CRL
+if ($clonepage && !is_null($pageversion->xhtml)) {
+    print_error('duplicatepagetitle', 'eln', $returnurl);
+}
+
 if ($pageversion->locked === '1') {
     print_error('thispageislocked', 'eln', 'view.php?id='.$cm->id);
 }
@@ -196,6 +244,7 @@ if ($save) {
 
         // we are either returning to an existing page or a "new" one that ws
         // simultaneously created by someone else at the same time
+        ///crl might need modified fro cloing - I left it alone for now
         $returnpage = $addpage ? $frompage : $pagename;
 
         eln_release_lock($pageversion->pageid);
@@ -226,7 +275,12 @@ if ($save) {
         eln_save_new_version_section($course, $cm, $eln, $subwiki, $pagename, $pageversion->xhtml, $formdata->content['text'], $sectiondetails, $formdata);
     } else {
         if ($addpage) {
+            //echo "here - add page";
             eln_create_new_page($course, $cm, $eln, $subwiki, $frompage, $pagename, $content, $formdata);
+        } else if ($clonepage) {
+            //echo "HERE BEFORE CLONE NEW PAGE";
+	    eln_clone_new_page($course, $cm, $eln, $subwiki, $clonefrompage, $pagename, $content, $formdata);
+            //eln_create_new_page($course, $cm, $eln, $subwiki, $frompage, $pagename, $content, $formdata);
         } else {
             if ($addsection) {
                 eln_create_new_section($course, $cm, $eln, $subwiki, $pagename, $formdata->content['text'], $sectionheader, $formdata);
@@ -303,6 +357,11 @@ if (!$lockok) {
     if ($addpage) {
         $pageinputs .= html_writer::empty_tag('input', array('type' => 'hidden',
                         'name' => 'frompage', 'value' => $frompage));
+    }
+
+    if ($clonepage) {
+        $pageinputs .= html_writer::empty_tag('input', array('type' => 'hidden',
+                        'name' => 'clonefrompage', 'value' => $clonefrompage));
     }
 
     $newsectioninput = '';
@@ -419,6 +478,7 @@ $data->id = $cm->id;
 $data->startversionid = $pageversion->versionid;
 $data->page = $pagename;
 $data->frompage = $frompage;
+$data->clonefrompage = $clonefrompage;
 $data->newsection = $newsection;
 $data->section = $section;
 $data->user = $subwiki->userid;
@@ -433,14 +493,36 @@ if ($useattachments) {
 
 // Prepare form editor attachments
 $contentdraftid = file_get_submitted_draft_itemid('content');
+
+
+//$currenttext = file_prepare_draft_area($contentdraftid, $context->id, 'mod_eln', 'content',
+//        empty($pageversion->versionid) ? null : $pageversion->versionid,
+//        array('subdirs' => false), empty($existing) ? '' : $existing);
+
+//$currenttext = "Some Text";
+
+if($clonepage){
+$currentpage = eln_get_current_page($subwiki, $clonefrompage);
+$currenttext = $currentpage->xhtml;
+//Get sections only for clone
+
+$currenttext = eln_find_sections_html($currenttext);
+//print_object($currentpage);
+} else {
 $currenttext = file_prepare_draft_area($contentdraftid, $context->id, 'mod_eln', 'content',
         empty($pageversion->versionid) ? null : $pageversion->versionid,
         array('subdirs' => false), empty($existing) ? '' : $existing);
+}
+
+
+
 
 $data->content = array('text' => $currenttext,
        'format' => empty($pageversion->xhtmlformat)
            ? editors_get_preferred_format() : $pageversion->xhtmlformat,
        'itemid' => $contentdraftid);
+//echo "before data";
+//print_object($data);
 
 $mform->set_data($data);
 

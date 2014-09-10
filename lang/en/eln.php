@@ -293,8 +293,12 @@ $string['csvdownload']='Download in spreadsheet format (UTF-8 .csv)';
 $string['excelcsvdownload']='Download in Excel-compatible format (.csv)';
 
 $string['create']='Create';
-$string['createnewpage']='Create new experiment/notebook page';
+$string['clone']='Clone';
+
+$string['createnewpage']='Create new sub-experiment/notebook page';
+$string['clonenewpage']='Clone this experiment/notebook page';
 $string['typeinpagename']='Type experiment name here';
+$string['typeinclonepagename']='Type cloned experiment name here';
 $string['add']='Add';
 $string['typeinsectionname']='Type section title here';
 $string['addnewsection']='Add new section to this experiment/notebook page';
@@ -336,7 +340,7 @@ $string['words'] = 'Words';
 // Participation
 $string['myparticipation'] = 'My participation';
 $string['userparticipation'] = 'User participation';
-$string['participationbyuser'] = 'Participation by user';
+$string['participationbyuser'] = 'Participation';
 $string['viewparticipationerrror'] = 'Cannot view user participation.';
 $string['pagescreated'] = 'Pages created';
 $string['pageedits'] = 'Page edits';

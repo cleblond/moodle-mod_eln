@@ -41,6 +41,8 @@ $completion->set_module_viewed($cm);
 
 $elnoutput = $PAGE->get_renderer('mod_eln');
 
+//echo "subwiki=".print_object($subwiki);
+
 echo $elnoutput->eln_print_start($eln, $cm, $course, $subwiki, $pagename, $context);
 
 // Check consistency in setting subwikis and group mode
@@ -56,6 +58,8 @@ if (($cm->groupmode > 0) && !isset($subwiki->groupid)) {
 
 // Get the current page version
 $pageversion = eln_get_current_page($subwiki, $pagename);
+//print_object($pageversion);
+
 $locked = ($pageversion) ? $pageversion->locked : false;
 
 eln_print_tabs('view', $pagename, $subwiki, $cm, $context, $pageversion ? true : false, $locked);
@@ -82,6 +86,7 @@ if ($pageversion) {
     echo $data[0];
     if ($subwiki->canedit && $pageversion->locked != '1') {
         print eln_display_create_page_form($subwiki, $cm, $pageversion);
+        //print eln_display_clone_page_form($subwiki, $cm, $pageversion);
     }
     if (has_capability('mod/eln:lock', $context)) {
         print eln_display_lock_page_form($pageversion, $id);
@@ -94,7 +99,7 @@ if ($pageversion) {
         print '<p>' . get_string('startpagedoesnotexist', 'eln').'</p>';
     }
     
-//    print get_string($pagename ? 'pagedoesnotexist' : 'startpagedoesnotexist', 'eln').'</p>';
+    //print get_string($pagename ? 'pagedoesnotexist' : 'startpagedoesnotexist', 'eln').'</p>';
     if ($subwiki->canedit) {
         print '<p>'.get_string('wouldyouliketocreate', 'eln').'</p>';
         print "<form method='get' action='edit.php'>";
@@ -110,6 +115,7 @@ if ($timelocked = eln_timelocked($subwiki, $eln, $context)) {
 // init JS module
 $stringlist[] = array('typeinsectionname', 'eln');
 $stringlist[] = array('typeinpagename', 'eln');
+$stringlist[] = array('typeinclonepagename', 'eln');
 $stringlist[] = array('collapseannotation', 'eln');
 $stringlist[] = array('expandannotation', 'eln');
 $jsmodule = array('name'     => 'mod_eln_view',

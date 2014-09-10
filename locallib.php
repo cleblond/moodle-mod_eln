@@ -95,6 +95,27 @@ function eln_error($text, $source = null) {
     print_error("ELN error: $text (code ELN-$source)");
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /**
  * Gets cm, eln and subwiki based on selected activity id and subwiki id
  * Populates vars sent, overriding initial values
@@ -1594,6 +1615,46 @@ function eln_get_subwiki_missingpages($subwikiid, $limitfrom = '', $limitnum = '
     return $missing;
 }
 
+
+
+/**
+ * Given HTML content, finds all our marked section headings.
+ *
+ * @param string $content XHTML content
+ * @return string of sections heading skeleton.
+ */
+function eln_find_sections_html($content) {
+    $results = array();
+    $matchlist = array();
+    preg_match_all('~<h([0-9]) id="ouw_s([0-9]+_[0-9]+)">(.*?)</h([0-9])>~s',
+            $content, $matchlist, PREG_SET_ORDER);
+    print_object($matchlist);
+    $results = '';
+    foreach ($matchlist as $matches) {
+
+    $results .= $matches[0];
+    }
+
+    return $results;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /**
  * Given HTML content, finds all our marked section headings.
  *
@@ -1682,6 +1743,9 @@ function eln_internal_re_headings($matches) {
  * @param string $newcontent Content of new section (NO SLASHES)
  * @param object $sectiondetails Information from eln_get_section_details for section
  */
+
+//    eln_save_new_version($course, $cm, $eln, $subwiki, $newpagename, $sourcecontent, -1, -1, -1, null, $formdata);
+
 function eln_save_new_version_section($course, $cm, $eln, $subwiki, $pagename,
         $contentbefore, $newcontent, $sectiondetails, $formdata = null) {
     // Put section into content
@@ -2298,10 +2362,25 @@ function eln_display_create_page_form($subwiki, $cm, $pageversion) {
             get_string('create', 'eln') . '" />' .
             '</div></form></li>'; 
 
+
+
+if ($pageversion->title !== '') {
+    $result .= '<li>' . $genericformdetails .
+            '<input type="hidden" name="clonefrompage" value="' . $pageversion->title . '" />' .
+            '<label for="ouw_clonepagename">' . get_string('clonenewpage', 'eln') . '</label> '.
+            '<input type="text" name="clonepage" id="ouw_clonepagename" size="30" value="" />' .
+            '<input type="submit" id="ouw_clone" name="ouw_subb" value="' .
+            get_string('clone', 'eln') . '" />' .
+            '</div></form></li>'; 
+}
+
     $result .= '</ul></div>';
 
     return $result;
 }
+
+
+
 
 /**
  * @param string $cm ID of course module
@@ -2322,7 +2401,8 @@ function eln_create_new_page($course, $cm, $eln, $subwiki, $pagename, $newpagena
         $sourcecontent = $sourcepage->xhtml;
         $sourcecontent .= '<p>[['.htmlspecialchars($newpagename).']]</p>';
     }
-
+    //echo "Before sourcecontent in create new page! <br>";
+    //print_object($sourcecontent);
     // Create the new page
     $pageversion = eln_get_current_page($subwiki, $newpagename, OUWIKI_GETPAGE_CREATE);
 
@@ -2335,6 +2415,74 @@ function eln_create_new_page($course, $cm, $eln, $subwiki, $pagename, $newpagena
 
     $transaction->allow_commit();
 }
+
+
+
+
+
+
+/**
+ * @param string $cm ID of course module
+ * @param string $subwiki details if it exists
+ * @param string $pagename of the original wiki page for which the new page is a link of,
+ *   null for start page
+ * @param string $newpagename page name of the new page being created (not null)
+ * @param string $content of desired new page
+ */
+//CRL
+function eln_clone_new_page($course, $cm, $eln, $subwiki, $pagename, $newpagename,
+        $content, $formdata) {
+    global $DB;
+    $transaction = $DB->start_delegated_transaction();
+
+    // need to get old page and new page
+    $sourcecontent = '';
+    if ($sourcepage = eln_get_current_page($subwiki, $pagename)) {
+        $sourcecontent = $sourcepage->xhtml;
+        //crl don't append new page name
+        //$sourcecontent .= '<p>[['.htmlspecialchars($newpagename).']]</p>';
+    }
+    //echo "Before sourcecontent! <br>";
+    //print_object($sourcecontent);
+    // Create the new page
+    $pageversion = eln_get_current_page($subwiki, $newpagename, OUWIKI_GETPAGE_CREATE);
+
+    // need to save version - will call error if does not work
+//    eln_save_new_version($course, $cm, $eln, $subwiki, $newpagename, $sourcecontent, -1, -1, -1,
+//            null, $formdata);
+
+    //eln_save_new_version($course, $cm, $eln, $subwiki, $newpagename, $sourcecontent,-1, -1, -1,
+    //        null, $formdata);
+
+    eln_save_new_version($course, $cm, $eln, $subwiki, $newpagename, $content,-1, -1, -1,
+            null, $formdata);
+
+    // save the revised original page as a new version
+    // disabled by CRL - maybe add clone info to history in future
+    //eln_save_new_version($course, $cm, $eln, $subwiki, $pagename, $sourcecontent);
+
+    $transaction->allow_commit();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * Creates a new section on a page from scratch

@@ -47,10 +47,17 @@ class mod_eln_edit_page_form extends moodleform {
             $mform->addElement('hidden', 'page', '');
             $mform->setType('page', PARAM_TEXT);
         }
+
         if ($this->_customdata->addpage) {
             $mform->addElement('hidden', 'frompage', '');
             $mform->setType('frompage', PARAM_TEXT);
         }
+
+        if ($this->_customdata->clonepage) {
+            $mform->addElement('hidden', 'clonefrompage', '');
+            $mform->setType('clonefrompage', PARAM_TEXT);
+        }
+
         if ($this->_customdata->addsection) {
             $mform->addElement('hidden', 'newsection', '');
             $mform->setType('newsection', PARAM_TEXT);

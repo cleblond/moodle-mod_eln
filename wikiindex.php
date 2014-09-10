@@ -75,6 +75,10 @@ global $orphans;
 // Get actual index
 $index = eln_get_subwiki_index($subwiki->id);
 
+//print_object($subwiki);
+///CRL added
+//print_object($index);
+
 $orphans = false;
 $func = 'eln_display_wikiindex_page_in_index';
 if (count($index) == 0) {

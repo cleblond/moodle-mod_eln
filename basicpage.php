@@ -28,6 +28,7 @@ require_once($CFG->dirroot.'/mod/eln/locallib.php');
 
 $id = required_param('id', PARAM_INT);           // Course Module ID that defines wiki
 $pagename = optional_param('page', null, PARAM_RAW);    // Which page to show. Omitted for start page
+$clonepagename = optional_param('clonepage', null, PARAM_RAW);    // Which page to show. Omitted for start page
 $groupid = optional_param('group', 0, PARAM_INT); // Group ID. If omitted, uses first appropriate group
 $userid  = optional_param('user', 0, PARAM_INT);   // User ID (for individual wikis). If omitted, uses own
 
@@ -44,6 +45,12 @@ if (textlib::strlen($pagename) > 200) {
     print_error('pagenametoolong', 'eln');
 }
 // Convert nbsp to space
+
+//CRL added from cloning
+if (!is_null($clonepagename)) {
+$pagename = $clonepagename;
+}
+
 $pagename = str_replace(html_entity_decode('&nbsp;', ENT_QUOTES, 'UTF-8'), ' ', $pagename);
 $pagename = trim($pagename);
 if (strtolower($pagename) == strtolower(get_string('startpage', 'eln'))) {
