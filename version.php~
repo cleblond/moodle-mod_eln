@@ -18,4 +18,4 @@ $module->version  = 2014091200;
 $module->requires = 2014050800;
 $module->cron     = 60*60*24; // Once per day.
 
-$module->displayversion = 'Stable development version';
+$module->displayversion = 'Unstable development version';

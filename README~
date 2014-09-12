@@ -16,9 +16,5 @@ Modifications.
 * extensive language file string changes
 * Add "New Experiment" tab to navigation tabs for easily creating new experiment pages.
 * Changed start page to My ELN Index.
-* Add ability to "Clone experiments"
 * Migrated to new events API
-* Integrated index searching
-* Added "Search" tab to Details page.
-  
 

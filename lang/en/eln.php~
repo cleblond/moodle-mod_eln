@@ -349,7 +349,7 @@ $string['clonenewpage']='Clone this experiment/notebook page';
 $string['typeinpagename']='Type experiment name here';
 $string['typeinclonepagename']='Type cloned experiment name here';
 $string['add']='Add';
-$string['search']='Search';
+$string['search']='Search ELN';
 $string['typeinsectionname']='Type section title here';
 $string['addnewsection']='Add new section to this experiment/notebook page';
 $string['searchinfo']='Search this ELN';
@@ -415,7 +415,7 @@ To search for exact phrases use quote marks.
 
 To exclude a word insert a hyphen immediately before the word.
 
-Example: the search term <tt>picasso -sculpture &quot;early works&quot;</tt> will return results for &lsquo;picasso&rsquo; or the phrase &lsquo;early works&rsquo; but will exclude items containing &lsquo;sculpture&rsquo;.';
+Example: the search term <tt>extraction -recrystallization &quot;benzioc acid;</tt> will return results for &lsquo;extraction&rsquo; or the phrase &lsquo;benzoic acid&rsquo; but will exclude items containing &lsquo;recrystallization&rsquo;.';
 
 $string['sizewarning'] = 'This ELN page is very large and may operate slowly.
 If possible, please split the content into logical chunks and
