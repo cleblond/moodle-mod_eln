@@ -3154,7 +3154,7 @@ function eln_get_search_form($subwiki, $cmid) {
     //require_once($CFG->dirroot . '/mod/eln/difflib.php');
     //include_once($CFG->dirroot . '/mod/eln/searchlib.php');
     $query = optional_param('query', '', PARAM_RAW);
-    $out = html_writer::start_tag('form', array('action' => 'wikiindex.php', 'method' => 'get'));
+    $out = html_writer::start_tag('form', array('action' => 'wikiindex.php.php', 'method' => 'get'));
     $out .= html_writer::start_tag('div');
     $out .= html_writer::tag('label', get_string('search', 'eln'),
             array('for' => 'eln_searchquery'));

@@ -243,7 +243,7 @@ function eln_ousearch_update_all($feedback = null, $courseid = 0) {
         foreach ($rs as $result) {
 
             // Update the page for search
-            $doc = new eln_document();
+            $doc = new local_ousearch_document();
             $doc->init_module_instance('eln', $coursemodule);
             if ($result->groupid) {
                 $doc->set_group_id($result->groupid);

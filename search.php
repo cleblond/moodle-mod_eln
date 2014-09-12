@@ -24,7 +24,7 @@
  */
 
 require_once(dirname(__FILE__) . '/../../config.php');
-require_once($CFG->dirroot.'/local/ousearch/searchlib.php');
+require_once($CFG->dirroot.'/mod/eln/searchlib.php');
 require($CFG->dirroot.'/mod/eln/basicpage.php');
 
 $querytext = required_param('query', PARAM_RAW);
@@ -33,7 +33,7 @@ $url = new moodle_url('/mod/eln/search.php', array('id'=>$id, 'user'=>$userid, '
 $PAGE->set_url($url);
 $elnoutput = $PAGE->get_renderer('mod_eln');
 echo $elnoutput->eln_print_start($eln, $cm, $course, $subwiki, get_string('searchresults'), $context, null, null, null, '', '', $querytext);
-$query = new local_ousearch_search($querytext);
+$query = new eln_search($querytext);
 $query->set_coursemodule($cm);
 if ($subwiki->groupid) {
     $query->set_group_id($subwiki->groupid);
@@ -50,7 +50,7 @@ echo $foundsomething;
 if (!empty($CFG->block_resources_search_baseurl)) {
     $params = array('course' => $course->id, 'query' => $querytext);
     $restofwebsiteurl = new moodle_url('/blocks/resources_search/search.php', $params);
-    $strrestofwebsite = get_string('restofwebsite', 'local_ousearch');
+    $strrestofwebsite = get_string('restofwebsite', 'mod_eln');
     $altlink = html_writer::start_tag('div', array('class' => 'advanced-search-link'));
     $altlink .= html_writer::link($restofwebsiteurl, $strrestofwebsite);
     $altlink .= html_writer::end_tag('div');

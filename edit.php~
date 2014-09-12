@@ -26,7 +26,7 @@ require_once(dirname(__FILE__).'/../../config.php');
 require_once($CFG->dirroot.'/lib/ajax/ajaxlib.php');
 require_once($CFG->dirroot.'/mod/eln/basicpage.php');
 require_once($CFG->dirroot.'/mod/eln/edit_form.php');
-require_once($CFG->dirroot . '/mod/eln/searchlib.php');
+
 if (file_exists($CFG->dirroot.'/local/mobile/ou_lib.php')) {
     require_once($CFG->dirroot.'/local/mobile/ou_lib.php');
 }

@@ -132,7 +132,7 @@ if (count($index) == 0) {
     //if ($searchterm) print '<h3>Search Results ...</h3>';
     
 
-    if($querytext){
+
     $query = new eln_search($querytext);
     $query->set_coursemodule($cm);
     if ($subwiki->groupid) {
@@ -144,7 +144,6 @@ if (count($index) == 0) {
 
     $foundsomething = $query->display_results('search.php?'.eln_display_wiki_parameters('', $subwiki, $cm));
     print $foundsomething;
-    }
 
     //print '</ul>';
     print '</ul>';
