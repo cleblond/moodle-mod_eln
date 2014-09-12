@@ -28,11 +28,23 @@
 require_once(dirname(__FILE__) . '/../../config.php');
 require($CFG->dirroot.'/mod/eln/basicpage.php');
 
-$treemode = optional_param('type', '', PARAM_ALPHA) == 'tree';
+//$treemode = optional_param('type', '', PARAM_ALPHA) == 'tree';
+//$searchmode = optional_param('search', '', PARAM_ALPHA) == 'search';
+$searchterm = optional_param('searchterm', '', PARAM_ALPHA);
+$mode = optional_param('type', '', PARAM_ALPHA);
+
+//echo "mode=".$mode;
+
+
 $id = required_param('id', PARAM_INT); // Course Module ID
+//echo "searchmode=".$searchmode;
+//echo "searchterm=".$searchterm;
 
 $url = new moodle_url('/mod/eln/wikiindex.php', array('id'=>$id));
 $PAGE->set_url($url);
+
+
+
 
 if ($id) {
     if (!$cm = get_coursemodule_from_id('eln', $id)) {
@@ -66,9 +78,24 @@ $tabrow[] = new tabobject('alpha', 'wikiindex.php?'.$wikiparams,
     get_string('tab_index_alpha', 'eln'));
 $tabrow[] = new tabobject('tree', 'wikiindex.php?'.$wikiparams.'&amp;type=tree',
     get_string('tab_index_tree', 'eln'));
+$tabrow[] = new tabobject('search', 'wikiindex.php?'.$wikiparams.'&amp;type=search',
+    get_string('tab_index_search', 'eln'));
 $tabs = array();
 $tabs[] = $tabrow;
-print_tabs($tabs, $treemode ? 'tree' : 'alpha');
+
+/*
+if ($mode == "tree) {
+$mode='tree';
+} else if ($searchmode) {
+$mode='search';
+} else {
+$mode = 'alpha';
+}
+*/
+
+if($mode === "")$mode='alpha';
+
+print_tabs($tabs, $mode);
 print '<div id="eln_belowtabs">';
 
 global $orphans;
@@ -83,7 +110,7 @@ $orphans = false;
 $func = 'eln_display_wikiindex_page_in_index';
 if (count($index) == 0) {
     print '<p>'.get_string('startpagedoesnotexist', 'eln').'</p>';
-} else if ($treemode) {
+} else if ($mode == 'tree') {
     eln_build_tree($index);
     // Print out in hierarchical form...
     print '<ul class="ouw_indextree">';
@@ -95,6 +122,24 @@ if (count($index) == 0) {
             break;
         }
     }
+} else if ($mode == 'search') {
+    // ...search mode
+    //    eln_build_tree($index);
+    print eln_display_search_page_form($subwiki, $cm);
+    //$searchterm = "maximum";
+    print '<ul class="ouw_index">';
+    if ($searchterm) print '<h3>Search Results ...</h3>';
+    foreach ($index as $indexitem) {
+       // print $indexitem->title."<br>";
+        $sourcepage = eln_get_current_page($subwiki, $indexitem->title);
+       // print $sourcepage->xhtml;
+        if ($searchterm && strchr($sourcepage->xhtml, $searchterm)){
+            print '<li>' . eln_display_wikiindex_page_in_index($indexitem, $subwiki, $cm) . '</li>';
+        }
+
+    }
+    //print '</ul>';
+    print '</ul>';
 } else {
     // ...or standard alphabetical
     print '<ul class="ouw_index">';
@@ -108,46 +153,55 @@ if (count($index) == 0) {
     print '</ul>';
 }
 
-if ($orphans) {
-    print '<h2 class="ouw_orphans">'.get_string('orphanpages', 'eln').'</h2>';
-    print '<ul class="ouw_index">';
-    foreach ($index as $indexitem) {
-        if (count($indexitem->linksfrom) == 0 && $indexitem->title !== '') {
-            if ($treemode) {
-                $orphanindex = eln_get_sub_tree_from_index($indexitem->pageid, $index);
-                eln_build_tree($orphanindex);
-                print eln_tree_index($func, $indexitem->pageid, $orphanindex, $subwiki, $cm);
-            } else {
-                print '<li>' . eln_display_wikiindex_page_in_index($indexitem, $subwiki, $cm) . '</li>';
-            }
-        }
-    }
-    print '</ul>';
-}
 
-$missing = eln_get_subwiki_missingpages($subwiki->id);
-if (count($missing) > 0) {
-    print '<div class="ouw_missingpages"><h2>'.get_string('missingpages', 'eln').'</h2>';
-    print '<p>'.get_string(count($missing) > 1 ? 'advice_missingpages' : 'advice_missingpage', 'eln').'</p>';
-    print '<ul>';
-    $first = true;
-    foreach ($missing as $title => $from) {
-        print '<li>';
-        if ($first) {
-            $first = false;
-        } else {
-            print ' &#8226; ';
-        }
-        print '<a href="view.php?'.eln_display_wiki_parameters($title, $subwiki, $cm).'">'.
-            htmlspecialchars($title).'</a> <span class="ouw_missingfrom">('.
-            get_string(count($from) > 1 ? 'frompages' : 'frompage', 'eln',
-                '<a href="view.php?'.eln_display_wiki_parameters($from[0], $subwiki, $cm).'">'.
-                ($from[0] ? htmlspecialchars($from[0]) : get_string('startpage', 'eln')).'</a>)</span>');
-        print '</li>';
-    }
-    print '</ul>';
-    print '</div>';
-}
+
+
+//CRL Hide for Search
+if ($mode !== 'search') {
+
+	if ($orphans) {
+	    print '<h2 class="ouw_orphans">'.get_string('orphanpages', 'eln').'</h2>';
+	    print '<ul class="ouw_index">';
+	    foreach ($index as $indexitem) {
+		if (count($indexitem->linksfrom) == 0 && $indexitem->title !== '') {
+		    if ($mode == 'tree') {
+		        $orphanindex = eln_get_sub_tree_from_index($indexitem->pageid, $index);
+		        eln_build_tree($orphanindex);
+		        print eln_tree_index($func, $indexitem->pageid, $orphanindex, $subwiki, $cm);
+		    } else {
+		        print '<li>' . eln_display_wikiindex_page_in_index($indexitem, $subwiki, $cm) . '</li>';
+		    }
+		}
+	    }
+	    print '</ul>';
+	}
+
+	$missing = eln_get_subwiki_missingpages($subwiki->id);
+	if (count($missing) > 0) {
+	    print '<div class="ouw_missingpages"><h2>'.get_string('missingpages', 'eln').'</h2>';
+	    print '<p>'.get_string(count($missing) > 1 ? 'advice_missingpages' : 'advice_missingpage', 'eln').'</p>';
+	    print '<ul>';
+	    $first = true;
+	    foreach ($missing as $title => $from) {
+		print '<li>';
+		if ($first) {
+		    $first = false;
+		} else {
+		    print ' &#8226; ';
+		}
+		print '<a href="view.php?'.eln_display_wiki_parameters($title, $subwiki, $cm).'">'.
+		    htmlspecialchars($title).'</a> <span class="ouw_missingfrom">('.
+		    get_string(count($from) > 1 ? 'frompages' : 'frompage', 'eln',
+		        '<a href="view.php?'.eln_display_wiki_parameters($from[0], $subwiki, $cm).'">'.
+		        ($from[0] ? htmlspecialchars($from[0]) : get_string('startpage', 'eln')).'</a>)</span>');
+		print '</li>';
+	    }
+	    print '</ul>';
+	    print '</div>';
+	}
+
+
+
 
 $tree = 0;
 if (!empty($treemode)) {
@@ -192,6 +246,9 @@ WHERE
     }
     print '</ul></div>';
 }
+
+}  //End hide for search mode
+
 
 // Footer
 eln_print_footer($course, $cm, $subwiki, $pagename);

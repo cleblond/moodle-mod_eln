@@ -2381,6 +2381,45 @@ if ($pageversion->title !== '') {
 
 
 
+/**
+ * @param object $subwiki For details of user/group and ID so that
+ * we can make links
+ *
+ * @param object $cm Course-module object (again for making links)
+ * @param object $pageversion Data from page and version tables.
+ * @return string HTML content for page
+ */
+function eln_display_search_page_form($subwiki, $cm) {
+    $result = '';
+
+    // shared form elements
+    $genericformdetails = '<form method="get" action="wikiindex.php">' .
+            '<div class="eln_addnew_div">' .
+            '<input type="hidden" name="id" value="'.$cm->id.'"/>';
+
+    $result .= '<div id="eln_addnew"><ul>';
+
+    // Create new section.
+    $result .= $genericformdetails;
+   
+    //$result .= '<input type="hidden" name="page" value="" />';
+    
+    $result .= '<input type="hidden" name="type" value="search" />';
+    $result .= '<label for="ouw_searchterm">' . get_string('searchinfo', 'eln') . '</label> ' .
+            '<input type="text" size="30" name="searchterm" id="ouw_searchterm" value="" />' .
+            '<input type="submit" id="ouw_search" name="ouw_subb" value="' .
+            get_string('search', 'eln').'" />' .
+            '</div></form>';
+
+    $result .= '</div>';
+
+    return $result;
+}
+
+
+
+
+
 
 /**
  * @param string $cm ID of course module

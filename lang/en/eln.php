@@ -153,6 +153,7 @@ $string['myindex']='My index';
 
 $string['tab_index_alpha']='Alphabetical';
 $string['tab_index_tree']='Structure';
+$string['tab_index_search']='Search';
 
 $string['lastchange']='Last change: {$a->date} / {$a->userlink}';
 $string['orphanpages']='Unlinked pages';
@@ -300,8 +301,10 @@ $string['clonenewpage']='Clone this experiment/notebook page';
 $string['typeinpagename']='Type experiment name here';
 $string['typeinclonepagename']='Type cloned experiment name here';
 $string['add']='Add';
+$string['search']='Search';
 $string['typeinsectionname']='Type section title here';
 $string['addnewsection']='Add new section to this experiment/notebook page';
+$string['searchinfo']='Search this ELN';
 $string['createdbyon'] = 'created by {$a->name} on {$a->date}';
 
 $string['numedits'] = '{$a} edit(s)';
@@ -357,7 +360,7 @@ $string['userdetails'] = 'Detail for {$a}';
 $string['viewwikistartpage'] = 'View {$a}';
 $string['viewwikichanges'] = 'Changes for {$a}';
 
-$string['search'] = 'Search this ELN';
+//$string['search'] = 'Search this ELN';
 $string['search_help'] = 'Type your search term and press Enter or click the button.
 
 To search for exact phrases use quote marks.
