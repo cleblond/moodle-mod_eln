@@ -270,7 +270,7 @@ if ($save) {
         eln_print_footer($course, $cm, $subwiki, $pagename);
         exit;
     }
-
+    $event = null;
     if ($section) {
         eln_save_new_version_section($course, $cm, $eln, $subwiki, $pagename, $pageversion->xhtml, $formdata->content['text'], $sectiondetails, $formdata);
     } else {
@@ -297,8 +297,36 @@ if ($save) {
         $completion->update_state($cm, COMPLETION_COMPLETE);
     }
 
-    // release lock and redirect
+    // release lock log and redirect
     eln_release_lock($pageversion->pageid);
+
+
+// Log.
+ $info = '';
+ if ($pagename) {
+ $info = $pagename;
+ }
+
+ // Log usage edit.
+ $params = array(
+ 'context' => $context,
+ 'objectid' => $pageversion->pageid,
+ 'other' => array('info' => $info, 'logurl' => $url->out_as_local_url())
+ );
+
+ if ($addpage) {
+ $event = \mod_eln\event\page_created::create($params);
+ } else {
+ $event = \mod_eln\event\page_updated::create($params);
+ }
+ $event->add_record_snapshot('course_modules', $cm);
+ $event->add_record_snapshot('course', $course);
+ $event->add_record_snapshot('eln', $eln);
+ $event->trigger();
+
+ // Redirect.
+
+
 
     redirect($returnurl);
     exit;

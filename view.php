@@ -89,7 +89,8 @@ if ($pageversion) {
         //print eln_display_clone_page_form($subwiki, $cm, $pageversion);
     }
     if (has_capability('mod/eln:lock', $context)) {
-        print eln_display_lock_page_form($pageversion, $id);
+        //print eln_display_lock_page_form($pageversion, $id);
+        print eln_display_lock_page_form($pageversion, $id, $pagename);
     }
 } else {
     // Page does not exist

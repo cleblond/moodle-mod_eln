@@ -47,5 +47,8 @@ $logs = array(
     array('module' => 'eln', 'action' => 'view all', 'mtable' => 'eln', 'field' => 'name'),
     array('module' => 'eln', 'action' => 'viewold', 'mtable' => 'eln', 'field' => 'name'),
     array('module' => 'eln', 'action' => 'wikihistory', 'mtable' => 'eln', 'field' => 'name'),
-    array('module' => 'eln', 'action' => 'wikiindex', 'mtable' => 'eln', 'field' => 'name')
+//    array('module' => 'eln', 'action' => 'wikiindex', 'mtable' => 'eln', 'field' => 'name')
+    array('module' => 'eln', 'action' => 'wikiindex', 'mtable' => 'eln', 'field' => 'name'),
+    array('module' => 'eln', 'action' => 'page created', 'mtable' => 'eln', 'field' => 'name'),
+    array('module' => 'eln', 'action' => 'page updated', 'mtable' => 'eln', 'field' => 'name')
 );

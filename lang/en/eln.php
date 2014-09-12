@@ -589,3 +589,15 @@ $string['importedpages'] = 'Imported pages';
 $string['importedfrom'] = 'Imported from:';
 $string['pagesimported'] = 'Pages imported';
 $string['unabletoimport'] = 'No ELN\'s available to import from.';
+
+
+
+$string['event:elnviewed'] = 'eln view';
+$string['event:pageunlock'] = 'eln unlock';
+$string['event:pagelock'] = 'eln lock';
+$string['event:elnundelete'] = 'eln version undelete';
+$string['event:elndelete'] = 'eln version delete';
+$string['event:elnpagecreated'] = 'eln page created';
+$string['event:elnpageupdated'] = 'eln page updated';
+
+

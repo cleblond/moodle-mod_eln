@@ -45,7 +45,7 @@ require_course_login($course->id, true);
 $PAGE->set_pagelayout('incourse');
 $context = context_course::instance($course->id);
 
-add_to_log($course->id, 'eln', 'view all', "index.php?id=$course->id", '');
+//add_to_log($course->id, 'eln', 'view all', "index.php?id=$course->id", '');
 
 // Get all required strings.
 $strname = get_string('name');
@@ -98,6 +98,16 @@ foreach ($elns as $eln) {
 }
 
 echo html_writer::table($table);
+
+// Log usage view.
+$params = array(
+ 'context' => $context,
+);
+
+$event = \mod_eln\event\course_module_instance_list_viewed::create($params);
+$event->add_record_snapshot('course', $course);
+$event->trigger();
+
 
 // Finish the page.
 echo $OUTPUT->footer();

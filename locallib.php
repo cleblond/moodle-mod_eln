@@ -1122,7 +1122,7 @@ function eln_print_header($eln, $cm, $subwiki, $pagename, $afterpage = null,
 function eln_print_footer($course, $cm, $subwiki, $pagename = null, $logurl = null,
         $logaction = null, $loginfo = null) {
     global $PAGE, $OUTPUT;
-
+    $info = '';
     echo '</div>';
     echo $OUTPUT->footer();
 
@@ -1136,11 +1136,14 @@ function eln_print_footer($course, $cm, $subwiki, $pagename = null, $logurl = nu
     if ($subwiki->userid) {
         $url .= '&user='.$subwiki->userid;
     }
-    if ($pagename !== null) {
+
+//    if ($pagename !== null) {
+
+    if (!empty($pagename)) {
         $url .= '&page='.urlencode($pagename);
         $info = $pagename;
-    } else {
-        $info = '';
+    //} else {
+    //    $info = '';
     }
     if ($loginfo) {
         if ($info) {
@@ -1149,7 +1152,32 @@ function eln_print_footer($course, $cm, $subwiki, $pagename = null, $logurl = nu
         $info .= $loginfo;
     }
     $action = $logaction ? $logaction : preg_replace('~\..*$~', '', $url);
-    add_to_log($course->id, 'eln', $action, $url, $info, $cm->id);
+
+
+
+//    add_to_log($course->id, 'eln', $action, $url, $info, $cm->id);
+
+ // Log usage view.
+$params = array(
+'context' => context_module::instance($cm->id),
+'objectid' => $subwiki->wikiid,
+'other' => array('info' => $info, 'action' => $action, 'logurl' => $url)
+);
+
+$event = \mod_eln\event\eln_viewed::create($params);
+$event->add_record_snapshot('course_modules', $cm);
+$event->add_record_snapshot('course', $course);
+$event->trigger();
+
+
+
+
+
+
+
+
+
+
 }
 
 function eln_nice_date($time, $insentence = null, $showrecent = null) {

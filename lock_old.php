@@ -105,17 +105,17 @@ if (!$lockok) {
 // To have got this far everything checks out so lock or unlock the page as requested
 if ($action == get_string('lockpage', 'eln')) {
     eln_lock_editing($pageid, true);
-    $eventtype = 'lock';
+    $event = 'lock';
 } else if ($action == get_string('unlockpage', 'eln')) {
     eln_lock_editing($pageid, false);
-    $eventtype = 'unlock';
+    $event = 'unlock';
 }
 
 // all done - release the editing lock...
 eln_release_lock($pageversion->pageid);
 
 // add to moodle log...
-$url = 'view.php';
+$url = 'lock.php';
 $url .= (strpos($url, '?')===false ? '?' : '&').'id='.$cm->id;
 if ($subwiki->groupid) {
     $url .= '&group='.$subwiki->groupid;
@@ -123,31 +123,13 @@ if ($subwiki->groupid) {
 if ($subwiki->userid) {
     $url .= '&user='.$subwiki->userid;
 }
-$info = '';
 if ($pagename) {
     $url .= '&page='.urlencode($pagename);
     $info = $pagename;
-}
-
-// Add to event log.
-
-// Log usage view.
-$params = array(
-        'context' => $context,
-        'objectid' => $pageid,
-        'other' => array('info' => $info, 'logurl' => $url)
-);
-
-$event = null;
-if ($eventtype == 'lock') {
-    $event = \mod_eln\event\page_lock::create($params);
 } else {
-    $event = \mod_eln\event\page_unlock::create($params);
+    $info = '';
 }
-$event->add_record_snapshot('course_modules', $cm);
-$event->add_record_snapshot('course', $course);
-$event->add_record_snapshot('eln', $eln);
-$event->trigger();
+add_to_log($course->id, 'eln', $event, $url, $info, $cm->id);
 
 // redirect back to the view page.
-redirect($url);
+redirect('view.php?id='.$id);
