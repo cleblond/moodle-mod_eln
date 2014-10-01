@@ -119,7 +119,7 @@ function eln_update_instance($data, $mform) {
 
 function eln_delete_instance($id) {
     global $DB, $CFG;
-
+    include_once($CFG->dirroot . '/mod/eln/searchlib.php');
     require_once($CFG->dirroot.'/mod/eln/locallib.php');
 
     $cm = get_coursemodule_from_instance('eln', $id, 0, false, MUST_EXIST);
@@ -130,9 +130,10 @@ function eln_delete_instance($id) {
     $fs->delete_area_files($context->id, 'mod_eln', 'template', $id);
 
     // Delete search data
-    if (eln_search_installed()) {
+//CRL mod
+//    if (eln_search_installed()) {
         eln_document::delete_module_instance_data($cm);
-    }
+//    }
 
     // Delete grade
     $eln = $DB->get_record('eln', array('id' => $cm->instance));

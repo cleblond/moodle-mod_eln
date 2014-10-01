@@ -1820,7 +1820,7 @@ function eln_save_new_version($course, $cm, $eln, $subwiki, $pagename, $content,
 
     global $DB, $USER, $CFG;
     global $elninternalre, $eln_count; // Nasty but I can't think of a better way
-    //include_once($CFG->dirroot . '/mod/eln/searchlib.php');
+    include_once($CFG->dirroot . '/mod/eln/searchlib.php');
     $transaction = $DB->start_delegated_transaction();
 
     // Find page if it exists
