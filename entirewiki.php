@@ -179,6 +179,7 @@ switch ($format) {
         $zip = get_file_packer();
         $file = $zip->archive_to_storage($files, $context->id, 'mod_eln', 'temp', $id, '/', $filename . '.zip');
         ///CRL Disable next line to stop template export!
+        //can't have any echos or print statements or else the zip will be corrupt.
         send_stored_file($file, 0, 0, true, array('dontdie' => true));
         // Delete all our temp files used in this process.
         $fs->delete_area_files($context->id, 'mod_eln', 'temp', $id);
@@ -247,13 +248,16 @@ function get_online_display_content($format, $pageversion, $context, $subwiki, $
             //CRL changed from original ouwiki
             preg_match_all('#<a.*?href="@@PLUGINFILE@@/(.*?)"(.*?)>.*?</a>#', $pageversion->xhtml, $matches);
             //echo "here";
-            //print_r($matches);
+            //print_object($matches);
             if (! empty($matches)) {
                 // Extract the file names from the matches.
                 foreach ($matches[1] as $key => $match) {
                     //echo $match;
                     // Get file name and copy to zip.
                     $match = urldecode($match);
+                    //print_object($match);
+                    //strip any parameters
+                    $match=strstr($match, '?', true);
                     // Copy image - on fail swap tag with string.
                     if ($file = $fs->get_file($context->id, 'mod_eln', 'content',
                             $pageversion->versionid, '/', $match)) {
