@@ -208,7 +208,7 @@ function get_online_display_content($format, $pageversion, $context, $subwiki, $
     switch ($format) {
         case OUWIKI_FORMAT_TEMPLATE:
             // Print template wiki page.
-            
+            $brokenimagestr = get_string('brokenimage', 'eln');
             $markup .= '<page>';
             if ($pageversion->title !== '') {
                 $markup .= '<title>' . htmlspecialchars($pageversion->title) . '</title>';
