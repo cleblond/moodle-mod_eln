@@ -719,7 +719,7 @@ function eln_get_current_page($subwiki, $pagename, $option = OUWIKI_GETPAGE_REQU
 
     $params = array($subwiki->id);
     $pagename_s = 'UPPER(p.title) = ?';
-    $params[] = textlib::strtoupper($pagename);
+    $params[] = core_text::strtoupper($pagename);
 
     $jointype = $option == OUWIKI_GETPAGE_REQUIREVERSION ? 'JOIN' : 'LEFT JOIN';
 
@@ -752,7 +752,7 @@ function eln_get_current_page($subwiki, $pagename, $option = OUWIKI_GETPAGE_REQU
         }
 
         // Update any missing link records that might exist
-        $uppertitle = textlib::strtoupper($pagename);
+        $uppertitle = core_text::strtoupper($pagename);
         try {
             $DB->execute("UPDATE {eln_links}
                 SET tomissingpage = NULL, topageid = ?
@@ -842,7 +842,7 @@ function eln_get_page_version($subwiki, $pagename, $versionid) {
             LEFT JOIN {user} u ON v.userid = u.id
             WHERE p.subwikiid = ? AND v.id = ? AND UPPER(p.title) = ?";
 
-    $pagename = textlib::strtoupper($pagename);
+    $pagename = core_text::strtoupper($pagename);
     $pageversion = $DB->get_record_sql($sql, array($subwiki->id, $versionid, $pagename));
 
     $pageversion->recentversions = false;
@@ -2071,8 +2071,8 @@ function eln_save_new_version($course, $cm, $eln, $subwiki, $pagename, $content,
     $link->tomissingpage = null;
     foreach ($externallinks as $url) {
         // Restrict length of URL
-        if (textlib::strlen($url) > 255) {
-            $url = textlib::substr($url, 0, 255);
+        if (core_text::strlen($url) > 255) {
+            $url = core_text::substr($url, 0, 255);
         }
         $link->tourl = $url;
         try {
@@ -2164,11 +2164,11 @@ function eln_get_wiki_link_details($wikilink) {
 
     // Trim to 200 characters or less (note: because we don't want to cut it off
     // in the middle of a character, we use proper UTF-8 functions)
-    if (textlib::strlen($wikilink) > 200) {
-        $wikilink = textlib::substr($wikilink, 0, 200);
-        $space = textlib::strrpos($wikilink, ' ');
+    if (core_text::strlen($wikilink) > 200) {
+        $wikilink = core_text::substr($wikilink, 0, 200);
+        $space = core_text::strrpos($wikilink, ' ');
         if ($space > 150) {
-            $wikilink = textlib::substr($wikilink, 0, $space);
+            $wikilink = core_text::substr($wikilink, 0, $space);
         }
     }
 
