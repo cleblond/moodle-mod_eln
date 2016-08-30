@@ -14,8 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-$module->version  = 2014091200;
-$module->requires = 2014050800;
-$module->cron     = 60*60*24; // Once per day.
+defined('MOODLE_INTERNAL') || die;
 
-$module->displayversion = 'Stable development version';
+$plugin->version  = 2014091200;
+$plugin->requires = 2014050800;
+$plugin->cron     = 60*60*24; // Once per day.
+$plugin->component = 'mod_eln'; // Full name of the plugin (used for diagnostics)
+$plugin->displayversion = 'Stable development version';
