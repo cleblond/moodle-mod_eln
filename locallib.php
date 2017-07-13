@@ -301,7 +301,7 @@ function eln_create_subwiki($eln, $cm, $course, $userid = null, $groupid = null)
  * @param object $subwiki Subwiki object
  * @param object $eln OU wiki object
  */
-function eln_init_pages($course, $cm, $eln, $subwiki, $eln) {
+function eln_init_pages($course, $cm, $eln, $subwiki) {
     global $CFG;
 
     if (is_null($eln->template)) {
